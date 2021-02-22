@@ -13,7 +13,15 @@ app.use(logger("dev"));
 // Static directory
 app.use(express.static("public"));
 // Setting up the connection
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {useNewUrlParser: true});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workout',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 // Routes
 require("./routes/apiRoute.js")(app);
 require("./routes/htmlRoute.js")(app);
